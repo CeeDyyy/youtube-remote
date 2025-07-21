@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  nextjs:
+    build:
+      context: ./nextjs
+    restart: unless-stopped
+
+  ws-server:
+    build:
+      context: ./ws-server
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.25
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - nextjs
+      - ws-server

@@ -1,6 +1,6 @@
 // server.js
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 80 });
+const wss = new WebSocket.Server({ port: 8088 });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function (msg) {
