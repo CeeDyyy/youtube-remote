@@ -6,7 +6,7 @@ export default function Home() {
   const ws = useRef(null);
 
   // Replace with your PC's LAN address!
-  const serverUrl = "ws://10.99.145.125:8088";
+  const serverUrl = "wss://ytr-serv.maisonsoftware.app";
 
   useEffect(() => {
     ws.current = new WebSocket(serverUrl);

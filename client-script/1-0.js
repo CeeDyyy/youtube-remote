@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         YouTube WebSocket Remote Control
+// @name         YouTube WebSocket Remote Control 1.0 - Fully usable
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      1.0
 // @description  Control YouTube from remote device via WebSocket
 // @match        https://*.youtube.com/*
 // @grant        none
@@ -11,7 +11,7 @@
   'use strict';
 
   // Connect to your WebSocket server (change IP as needed)
-  const ws = new WebSocket('ws://localhost:8088');
+  const ws = new WebSocket('wss://ytr-serv.maisonsoftware.app');
   ws.onopen = function() {
     console.log('[YouTubeRemote] WebSocket connected');
   };
