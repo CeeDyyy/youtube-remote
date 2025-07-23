@@ -1,6 +1,6 @@
 'use client'
 
-import Clock from './clock';
+import Clock from '../../../components/clock';
 
 export default function Display() {
 

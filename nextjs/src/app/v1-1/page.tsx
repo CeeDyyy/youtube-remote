@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import Display from '../../components/display';
+import Display from './components/display';
 
 export default function Home() {
     const ws = useRef(null);
