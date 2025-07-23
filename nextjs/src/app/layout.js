@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Version 1.0",
+  title: "v1.0",
   description: "Fully usable",
 };
 
