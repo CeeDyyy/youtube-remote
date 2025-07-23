@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Version 1.1",
+  title: "v1.1",
   description: "More Controls",
 };
 
