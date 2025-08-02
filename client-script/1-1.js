@@ -11,7 +11,7 @@
     'use strict';
 
     let ws = null;
-    let hasPendingReconnect = false;    // Flag For prevent listener stacking
+    let hasPendingReconnect = false; // Flag For prevent listener stacking
 
     function handleMessage(event) {
         const cmd = event.data;
