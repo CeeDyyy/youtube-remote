@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         YouTube WebSocket Remote Control 1.1 - More Controls
+// @name         YouTube WebSocket Remote Control 1.0.2 - Only if visible
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.0.2
 // @description  Control YouTube from remote device via WebSocket
 // @match        https://*.youtube.com/*
 // @grant        none
@@ -21,11 +21,6 @@
         if (cmd === 'forward') video.currentTime += 1;
         if (cmd === 'backward') video.currentTime -= 1;
         // Add more commands if needed
-        if (cmd === 'pause') video.pause();
-        if (cmd === 'play') video.play();
-        if (cmd === 'mute') video.muted = true;
-        if (cmd === 'unmute') video.muted = false;
-        if (cmd === 'toggle-mute') video.muted = !video.muted;
     };
 
     function connectWS() {
