@@ -4,20 +4,64 @@ import { useEffect, useRef, useState } from 'react';
 import Display from './components/display';
 
 export default function Home() {
-    const ws = useRef(null);
+    const ws = useRef<WebSocket | null>(null);
+    const reconnectTimeout = useRef<NodeJS.Timeout | null>(null);
+    const [connected, setConnected] = useState(false);
+    const [statusMsg, setStatusMsg] = useState("Disconnected");
 
     // Replace with your PC's LAN address!
     const serverUrl = "wss://ytr-serv.maisonsoftware.app";
 
+    function setupWebSocket() {
+        setStatusMsg("Connecting...");
+        console.log("[YouTubeRemote] Connecting...");
+        const socket = new WebSocket(serverUrl);
+
+        socket.onopen = () => {
+            setConnected(true);
+            setStatusMsg("Connected");
+            console.log("[YouTubeRemote] Connected");
+            // You can notify server or sync on open if needed
+        };
+
+        socket.onclose = () => {
+            setConnected(false);
+            setStatusMsg("Disconnected. Reconnecting...");
+            console.log("[YouTubeRemote] Disconnected. Reconnecting...");
+            // Reconnect after delay, unless already scheduled
+            if (!reconnectTimeout.current) {
+                reconnectTimeout.current = setTimeout(() => {
+                    setupWebSocket();
+                    reconnectTimeout.current = null;
+                }, 2000); // 2 seconds
+            }
+        };
+
+        socket.onerror = (err) => {
+            setStatusMsg("Connection error. Reconnecting...");
+            console.log("[YouTubeRemote] Connection error. Reconnecting...");
+            socket.close();
+        };
+
+        ws.current = socket;
+    }
+
     useEffect(() => {
-        ws.current = new WebSocket(serverUrl);
+        setupWebSocket();
         return () => {
             ws.current?.close();
+            if (reconnectTimeout.current) clearTimeout(reconnectTimeout.current);
         };
-    }, [serverUrl]);
+        // eslint-disable-next-line
+    }, []);
 
-    function send(msg: string) {
-        ws.current?.send(msg);
+    function send(msg: any) {
+        if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+            ws.current.send(typeof msg === "string" ? msg : JSON.stringify(msg));
+        } else {
+            setStatusMsg("Not connected!");
+            console.log("[YouTubeRemote] Not connected!");
+        }
     }
 
     const scrollMid = 100000;
@@ -109,6 +153,17 @@ export default function Home() {
             {downCount > 0 && (
                 <div style={{ ...styles.counter }}>+{downCount}</div>
             )}
+            <div style={{ ...styles.counter, top: '90%' }}>
+                <span
+                    style={{
+                        color: connected ? "green" : "red",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                    }}
+                >
+                    {statusMsg}
+                </span>
+            </div>
         </div>
     );
 }
