@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import Display from './components/display';
+import Clock from '../../components/clock';
 
 export default function Home() {
     const ws = useRef<WebSocket | null>(null);
@@ -118,8 +118,10 @@ export default function Home() {
     return (
         <div style={styles.page}>
             <div style={styles.spacer} />
-            <Display />
-            <div style={{ ...styles.counter, bottom: '5%', width: '50%', display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ ...styles.counter, top: '20%', color: 'white', fontSize: '2rem' }}>
+                <Clock />
+            </div>
+            <div style={{ ...styles.counter, bottom: '5%', width: '70%', display: 'flex', justifyContent: 'space-between' }}>
                 <button
                     onClick={() => isPause ?
                         (
@@ -148,10 +150,10 @@ export default function Home() {
                 </button>
             </div>
             {upCount > 0 && (
-                <div style={{ ...styles.counter }}>-{upCount}</div>
+                <div style={{ ...styles.counter, color: '#f44' }}>-{upCount}</div>
             )}
             {downCount > 0 && (
-                <div style={{ ...styles.counter }}>+{downCount}</div>
+                <div style={{ ...styles.counter, color: '#4f4' }}>+{downCount}</div>
             )}
             <div style={{ ...styles.counter, top: '90%' }}>
                 <span
@@ -180,12 +182,11 @@ const styles = {
     },
     counter: {
         position: 'fixed' as const,
-        bottom: '5%',  // top: '50%',
+        top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        fontSize: '2rem', // fontSize: '4rem',
+        fontSize: '4rem',
         zIndex: 999,
         transition: 'opacity 0.2s',
-        color: 'white',
     },
 };
