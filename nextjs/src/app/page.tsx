@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
+  if (window.top !== window.self) return; // 🔒 Prevent parallel connects (the unwanted/second connection that's appear around 40-50 second later)
+
   const ws = useRef(null);
 
   // Replace with your PC's LAN address!
@@ -18,7 +20,7 @@ export default function Home() {
   function send(msg: string) {
     ws.current?.send(msg);
   }
-  
+
   const scrollMid = 100000;
   const scrollStep = 10; // Sensitivity: how much scroll counts as one tick
   const [upCount, setUpCount] = useState(0);
