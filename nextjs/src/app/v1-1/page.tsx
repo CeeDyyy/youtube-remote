@@ -123,7 +123,7 @@ export default function Home() {
             <div style={{ ...styles.counter, top: '20%', color: 'white', fontSize: '2rem' }}>
                 <Clock />
             </div>
-            <div style={{ ...styles.counter, bottom: '5%', width: '70%', display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ ...styles.counter, width: '70%', display: 'flex', justifyContent: 'space-between' }}>
                 <button
                     onClick={() => isPause ?
                         (
