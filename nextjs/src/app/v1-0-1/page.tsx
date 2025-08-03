@@ -13,20 +13,20 @@ export default function Home() {
 
   function setupWebSocket() {
     setStatusMsg("Connecting...");
-    console.log("[YouTubeRemote] Connecting...");
+    console.log(`[YouTubeRemote] Connecting... [${new Date().toISOString()}]`);
     const socket = new WebSocket(serverUrl);
 
     socket.onopen = () => {
       setConnected(true);
       setStatusMsg("Connected");
-      console.log("[YouTubeRemote] Connected");
+      console.log(`[YouTubeRemote] Connected [${new Date().toISOString()}]`);
       // You can notify server or sync on open if needed
     };
 
     socket.onclose = () => {
       setConnected(false);
       setStatusMsg("Disconnected. Reconnecting...");
-      console.log("[YouTubeRemote] Disconnected. Reconnecting...");
+      console.log(`[YouTubeRemote] Disconnected. Reconnecting... [${new Date().toISOString()}]`);
       // Reconnect after delay, unless already scheduled
       if (!reconnectTimeout.current) {
         reconnectTimeout.current = setTimeout(() => {
@@ -38,7 +38,7 @@ export default function Home() {
 
     socket.onerror = (err) => {
       setStatusMsg("Connection error. Reconnecting...");
-      console.log("[YouTubeRemote] Connection error. Reconnecting...");
+      console.log(`[YouTubeRemote] Connection error. Reconnecting... [${new Date().toISOString()}]`);
       socket.close();
     };
 
@@ -59,7 +59,7 @@ export default function Home() {
       ws.current.send(typeof msg === "string" ? msg : JSON.stringify(msg));
     } else {
       setStatusMsg("Not connected!");
-      console.log("[YouTubeRemote] Not connected!");
+      console.log(`[YouTubeRemote] Not connected! [${new Date().toISOString()}]`);
     }
   }
 
