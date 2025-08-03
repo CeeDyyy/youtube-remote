@@ -19,6 +19,8 @@
     };
   }
 
+  if (window.top !== window.self) return; // 🔒 Prevent parallel connects (the unwanted/second connection that's appear around 40-50 second later)
+
   // Connect to your WebSocket server (change IP as needed)
   const ws = new WebSocket('wss://ytr-serv.maisonsoftware.app');
   ws.onopen = function () {

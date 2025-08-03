@@ -19,6 +19,8 @@
         };
     }
 
+    if (window.top !== window.self) return; // 🔒 Prevent parallel connects (the unwanted/second connection that's appear around 40-50 second later)
+
     let ws = null;
     let hasPendingReconnect = false; // Flag For prevent listener stacking
 
