@@ -10,6 +10,15 @@
 (function () {
   'use strict';
 
+  const consoleMethods = ['log', 'info', 'warn', 'error', 'debug'];
+  for (const method of consoleMethods) {
+    const original = console[method];
+    console[method] = (...args) => {
+      const timestamp = new Date().toISOString();
+      original.call(console, ...args, `[${timestamp}]`);
+    };
+  }
+
   // Connect to your WebSocket server (change IP as needed)
   const ws = new WebSocket('wss://ytr-serv.maisonsoftware.app');
   ws.onopen = function () {
