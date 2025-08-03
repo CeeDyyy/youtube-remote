@@ -1,3 +1,4 @@
+````markdown
 # youtube-remote
 # YouTube Playback Remote via Scroll
 
@@ -22,6 +23,7 @@ The system has three components:
    - Injected into the YouTube page
    - Listens for commands over WebSocket
    - Executes playback control (rewind, forward, play/pause, mute, etc.)
+   - Automatically reconnects to server if WebSocket is closed from idle/disconnected
 
 2. **WebSocket Server** (Node.js):
    - Acts as a relay between the controller and the YouTube client
@@ -31,49 +33,82 @@ The system has three components:
    - Can be opened on wearable device browsers
    - Sends commands via WebSocket based on scroll or button input
    - Designed for quick access and minimal interaction
+   - Displays current time
+   - Also supports automatically reconnects when socket closes or becomes idle
 
-## 🖥️ Architecture
+### 🖥️ Architecture
 
 ```text
 [ Wearable Controller (Next.js Web App) ]
                ↓
        [ WebSocket Server (Node.js) ]
                ↓
-[ YouTube Page (Tampermonkey Script) ]
-```
+[ YouTube Page (Tampermonkey Client Script) ]
+````
 
 ## ✨ Features
-⏪ Rewind and ⏩ forward by 1 second
 
-▶️ Pause / Play toggle
+* ⏪ Rewind and ⏩ forward by 1 second
 
-🔇 Mute toggle
+* ▶️ Pause / Play toggle
 
-🕓 Clock display on controller
+* 🔇 Mute toggle
 
-🔁 Real-time communication via WebSocket
+* 🕓 Clock display on controller
 
-🔄 Scroll gesture-based control (for devices with rotating input)
+* 🔁 Real-time communication via WebSocket
+
+* 🔄 Scroll gesture-based control (for devices with rotating input)
+
+* 🔌 Automatic WebSocket reconnection on disconnection on both controller and client
+
+---
 
 ## 📦 Versions
-Version	Features
-v1.0.0	Initial usable release with scroll control
-v1.0.1	Optimized: Only triggers when YouTube tab is visible
-v1.1.0	Additional commands: play/pause, mute; basic clock; partial sync prototype (WIP)
+
+| Version    | Description                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------ |
+| **v1.0.0** | Initial usable release with scroll-based remote control<br>🔧 Fix: Prevents parallel (duplicate) connections from iframes                                                                                                                |
+| **v1.0.1** | Added auto-reconnect (2s delay) on WebSocket in both client and controller                                   |
+| **v1.0.2** | Optimized: Only triggers when YouTube tab is visible                                                         |
+| **v1.1.0** | Added new additional controls: play/pause, mute; clock display; partial playback mirror sync prototype (WIP) |
 
 ## 🧪 Notes
-Currently tested on Samsung Galaxy Watch6 Classic (via built-in browser with rotating bezel)
 
-Concept and design optimized for wearables, but works on desktop/mobile too
+* Currently tested on **Samsung Galaxy Watch6 Classic** (via built-in browser with rotating bezel)
 
-YouTube playback mirror/sync is experimental and not finalized
+* Concept and design optimized for wearables, but works on desktop/mobile too
+
+* YouTube playback mirror/sync is **experimental and not finalized**
+
+* Requires Tampermonkey extension to inject script into YouTube page
+
+* WebSocket communication is open (no authentication) — should be secured if used publicly
+
+* Prevents Tampermonkey script from running Parallel/duplicate WebSocket connections (from iframes)
+
+---
 
 ## 🚧 To-Do
-Implement full visual sync/mirror with YouTube playback
+* Improve input UX for more wearables
 
-Optimize input UX for more wearables
+* Implement full visual sync/mirror with YouTube playback
 
-Add security/authentication layer for public server use
+* Add settings UI (e.g. adjust step time, toggle commands)
+
+* Add security/authentication layer for public server use
+
+---
 
 ## ⚠️ Disclaimer
-This project is for personal, educational, and prototyping purposes. It relies on Tampermonkey to inject scripts into YouTube, which may break if YouTube changes its internal APIs. Use responsibly.
+
+This project is for **personal, educational, and prototyping purposes**. It relies on Tampermonkey to inject scripts into YouTube to modifies its client-side, which may break if YouTube changes its internal structure. Use responsibly.
+
+---
+
+## 📃 License
+
+[MIT License](LICENSE)
+
+---
+```
