@@ -1,4 +1,3 @@
-````markdown
 # youtube-remote
 # YouTube Playback Remote via Scroll
 
@@ -44,7 +43,7 @@ The system has three components:
        [ WebSocket Server (Node.js) ]
                ↓
 [ YouTube Page (Tampermonkey Client Script) ]
-````
+```
 
 ## ✨ Features
 
