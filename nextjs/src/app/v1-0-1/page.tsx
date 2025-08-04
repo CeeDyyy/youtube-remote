@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
-  useEffect(() => {
-    if (typeof window !== 'undefined') if (window.top !== window.self) return; // 🔒 Prevent parallel connects (the unwanted/second connection that's appear around 40-50 second later)
-  }, []);
+  const [waitForClientSide, setWaitForClientSide] = useState(false);
+  useEffect(() => { setWaitForClientSide(true); }, []);
 
   const ws = useRef<WebSocket | null>(null);
   const reconnectTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -115,7 +114,7 @@ export default function Home() {
     };
   }, []);
 
-  return (
+  if (waitForClientSide) return (
     <div style={styles.page}>
       <div style={styles.spacer} />
       {upCount > 0 && (
