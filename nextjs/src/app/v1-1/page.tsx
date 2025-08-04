@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import Clock from '../../components/clock';
 
 export default function Home() {
-    if (typeof window !== 'undefined') if (window.top !== window.self) return; // 🔒 Prevent parallel connects (the unwanted/second connection that's appear around 40-50 second later)
+    useEffect(() => {
+        if (typeof window !== 'undefined') if (window.top !== window.self) return; // 🔒 Prevent parallel connects (the unwanted/second connection that's appear around 40-50 second later)
+    }, []);
 
     const ws = useRef<WebSocket | null>(null);
     const reconnectTimeout = useRef<NodeJS.Timeout | null>(null);
