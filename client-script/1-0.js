@@ -15,7 +15,7 @@
     const original = console[method];
     console[method] = (...args) => {
       const timestamp = new Date().toISOString();
-      original.call(console, ...args, `[${timestamp}]`);
+      original.call(console, "[YouTubeRemote]", ...args, `[${timestamp}]`);
     };
   }
 
@@ -24,12 +24,12 @@
   // Connect to your WebSocket server (change IP as needed)
   const ws = new WebSocket('wss://ytr-serv.maisonsoftware.app');
   ws.onopen = function () {
-    console.log("[YouTubeRemote] WebSocket connected");
+    console.log("WebSocket connected");
   };
 
   ws.onmessage = function (event) {
     const cmd = event.data;
-    console.log("[YouTubeRemote] Received cmd:", cmd);
+    console.log("Received cmd:", cmd);
     const video = document.querySelector('video');
     if (!video) return;
     if (cmd === 'forward') video.currentTime += 1;
