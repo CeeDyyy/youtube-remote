@@ -70,6 +70,7 @@ The system has three components:
 | **v1.0.0** | Initial usable release with scroll-based remote control<br>🔧 Fix: Prevents parallel (duplicate) connections from iframes                                                                                                                |
 | **v1.0.1** | Added auto-reconnect (2s delay) on WebSocket in both client and controller                                   |
 | **v1.0.2** | Optimized: Only triggers when YouTube tab is visible                                                         |
+| **v1.0.3** | Optimized: Replaced "only if visible" with **last active YouTube page** logic (if multiple YouTube tabs are open, only the most recently active one is controlled)                                                         |
 | **v1.1.0** | Added new additional controls: play/pause, mute; clock display; partial playback mirror sync prototype (WIP) |
 
 ## 🧪 Notes
