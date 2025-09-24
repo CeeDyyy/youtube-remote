@@ -70,8 +70,9 @@ The system has three components:
 | **v1.0.0** | Initial usable release with scroll-based remote control<br>🔧 Fix: Prevents parallel (duplicate) connections from iframes                                                                                                                |
 | **v1.0.1** | Added auto-reconnect (2s delay) on WebSocket in both client and controller                                   |
 | **v1.0.2** | Optimized: Only triggers when YouTube tab is visible                                                         |
-| **v1.0.3** | Optimized: Replaced "only if visible" with **last active YouTube page** logic (if multiple YouTube tabs are open, only the most recently active one is controlled)                                                         |
+| **v1.0.3** | Optimized: Replaced "only if visible" with **last active YouTube page** logic (if multiple YouTube tabs are open, only the most recently active one is controlled)<br>🗂️ Uses `localStorage` to keep track of the current owner tab                                                         |
 | **v1.1.0** | Added new additional controls: play/pause, mute; clock display; partial playback mirror sync prototype (WIP) |
+| **v1.2.0** | ✅ Full playback mirror/sync (a.k.a. *Request Video*): the controller can request the YouTube client’s video + params and play it on the remote device, with time sync and forward/backward support |
 
 ## 🧪 Notes
 
@@ -79,7 +80,12 @@ The system has three components:
 
 * Concept and design optimized for wearables, but works on desktop/mobile too
 
-* YouTube playback mirror/sync is **experimental and not finalized**
+* ~~YouTube playback mirror/sync is **experimental and not finalized**~~
+
+* From **v1.0.3 onward**, controls target the **last active YouTube page** instead of only working when the tab is visible  
+  - Uses `localStorage` to record the active YouTube page (the "owner")
+
+* From **v1.2.0 onward**, the controller can mirror YouTube playback (video, time sync, seeking)
 
 * Requires Tampermonkey extension to inject script into YouTube page
 
@@ -92,7 +98,7 @@ The system has three components:
 ## 🚧 To-Do
 * Improve input UX for more wearables
 
-* Implement full visual sync/mirror with YouTube playback
+* ~~Implement full visual sync/mirror with YouTube playback~~
 
 * Add settings UI (e.g. adjust step time, toggle commands)
 
