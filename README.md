@@ -118,3 +118,7 @@ This project is for **personal, educational, and prototyping purposes**. It reli
 
 ---
 ```
+
+## 📜 Changelog
+
+See the full development history in the [CHANGELOG.md](./CHANGELOG.md).
