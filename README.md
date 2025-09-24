@@ -117,7 +117,6 @@ This project is for **personal, educational, and prototyping purposes**. It reli
 [MIT License](LICENSE)
 
 ---
-```
 
 ## 📜 Changelog
 
