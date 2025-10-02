@@ -15,7 +15,7 @@
         const original = console[method];
         console[method] = (...args) => {
             const timestamp = new Date().toISOString();
-            original.call(console, "[YouTubeRemote]", ...args, `[${timestamp}]`);
+            original.call(console, "[YouTubeRemote_v1.2]", ...args, `[${timestamp}]`);
         };
     }
 
