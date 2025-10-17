@@ -44,7 +44,7 @@ The format follows **Phases + Days** (like a dev journal), alongside semantic **
   * Uses `localStorage` to store current “owner” YouTube page.
   * Behavior: if multiple YouTube tabs are open, only the last active tab responds to controls.
 
-* **Day 2 (v1.2.0)**
+* **Day 2 (v1.2)**
 
   * ✅ Playback Mirror/Sync completed (*Request Video*).
   * Controller can now request:
@@ -52,6 +52,11 @@ The format follows **Phases + Days** (like a dev journal), alongside semantic **
     * Video ID + playback params from client.
     * Remote playback on Galaxy Watch with synced time.
     * Forward/backward seeking applied across devices.
+
+* **Day 3 (v1.2)** (which take just a few minutes to do) 
+
+  * Added version info in each log message (controller, client, and server).  
+  * Helps identify which version each component is running for easier debugging and compatibility tracking.
 
 ---
 
