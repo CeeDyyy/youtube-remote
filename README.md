@@ -61,6 +61,8 @@ The system has three components:
 
 * 🔌 Automatic WebSocket reconnection on disconnection on both controller and client
 
+* 🔋 Energy-efficient player: background is true black and the player can be hidden instead of reloaded for faster response and better battery life (especially on AMOLED displays).
+
 ---
 
 ## 📦 Versions
@@ -72,7 +74,7 @@ The system has three components:
 | **v1.0.2** | Optimized: Only triggers when YouTube tab is visible                                                         |
 | **v1.0.3** | Optimized: Replaced "only if visible" with **last active YouTube page** logic (if multiple YouTube tabs are open, only the most recently active one is controlled)<br>🗂️ Uses `localStorage` to keep track of the current owner tab                                                         |
 | **v1.1.0** | Added new additional controls: play/pause, mute; clock display; partial playback mirror sync prototype (WIP) |
-| **v1.2.0** | ✅ Full playback mirror/sync (a.k.a. *Request Video*): the controller can request the YouTube client’s video + params and play it on the remote device, with time sync and forward/backward support |
+| **v1.2.0** | ✅ Full playback mirror/sync (a.k.a. *Request Video*): the controller can request the YouTube client’s video + params and play it on the remote device, with time sync and forward/backward support<br>### Recent Update — v1.2<br>Optimized power efficiency and performance on AMOLED devices. Added instant hide/show functionality instead of removing and reloading video. |
 
 ## 🧪 Notes
 
