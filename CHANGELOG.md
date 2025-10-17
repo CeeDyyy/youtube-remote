@@ -58,7 +58,7 @@ The format follows **Phases + Days** (like a dev journal), alongside semantic **
   * Added version info in each log message (controller, client, and server).  
   * Helps identify which version each component is running for easier debugging and compatibility tracking.
 
-* **Day 3 (v1.2 — Instant Visibility Toggle and Display Power Optimization)** (This take less than hour to make) 
+* **Day 3 (v1.2 — Instant Visibility Toggle and Display Power Optimization)** (This takes less than an hour to make) 
 
   * Changed background color of the video player (when no video is loaded) from `bg-gray-800` (#1F2937) to `bg-black` (#000000) to save an additional small amount of battery on AMOLED displays (e.g. Samsung Galaxy Watch 6 Classic).
   * Replaced the mute/unmute button with a hide/show button:
