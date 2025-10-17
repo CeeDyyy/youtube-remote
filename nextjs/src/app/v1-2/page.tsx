@@ -99,13 +99,6 @@ export default function Home() {
     const upTimerRef = useRef<NodeJS.Timeout | null>(null);
     const downTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-    function getVideo() {
-        send("get_info");
-    }
-    function getTime() {
-        send("get_time");
-    }
-
     // Function A (scroll up)
     const onScrollUp = () => {
         console.log('Function A: Scroll Up');
@@ -114,7 +107,7 @@ export default function Home() {
         if (upTimerRef.current) clearTimeout(upTimerRef.current);
         upTimerRef.current = setTimeout(() => {
             setUpCount(0); // Hide after 800ms
-            if (videoParam) getTime();
+            if (videoParam) send("get_time");
         }, 800);
     };
 
@@ -126,7 +119,7 @@ export default function Home() {
         if (downTimerRef.current) clearTimeout(downTimerRef.current);
         downTimerRef.current = setTimeout(() => {
             setDownCount(0); // Hide after 800ms
-            if (videoParam) getTime();
+            if (videoParam) send("get_time");
         }, 800);
     };
 
@@ -153,7 +146,7 @@ export default function Home() {
     }, [videoParam]);   // for onScrollUp and onScrollDown to see videoParam changes
 
     const [isPause, setIsPause] = useState(false);
-    const [isMute, setIsMute] = useState(false);
+    const [isHide, setIsHide] = useState(false);
 
     if (waitForClientSide) return (
         <div style={styles.page}>
@@ -162,13 +155,15 @@ export default function Home() {
                 <Clock />
             </div>
             <div style={styles.counter}>
-                <div className="w-[384px] h-[216px] bg-gray-800">
-                    {videoParam && <YouTubePlayer video={videoParam} isPause={isPause} seeker={seeker} />}
+                <div className="w-[384px] h-[216px] bg-black">
+                    <div className={isHide ? "invisible" : "visible"}>
+                        {videoParam && <YouTubePlayer video={videoParam} isPause={isPause || isHide} seeker={seeker} />}
+                    </div>
                 </div>
             </div>
             <div style={{ ...styles.counter, top: '82%', width: '50%', display: 'flex', justifyContent: 'space-between' }}>
                 <button
-                    onClick={() => videoParam ? setVideoParam(null) : getVideo()}
+                    onClick={() => videoParam ? setVideoParam(null) : send("get_info")}
                 >
                     {videoParam ? "🗑️" : "⬇️"}
                 </button>
@@ -180,24 +175,23 @@ export default function Home() {
                         ) : (
                             send("pause"),
                             setIsPause(true),
-                            videoParam && getTime()
+                            videoParam && send("get_time")
                         )
                     }
                 >
                     {isPause ? "▶️" : "⏸"}
                 </button>
                 <button
-                    onClick={() => isMute ?
+                    onClick={() => isHide ?
                         (
-                            send("unmute"),
-                            setIsMute(false)
+                            setIsHide(false)
                         ) : (
-                            send("mute"),
-                            setIsMute(true)
+                            setIsHide(true),
+                            videoParam && send("get_time")
                         )
                     }
                 >
-                    {isMute ? "🔊" : "🔇"}
+                    {isHide ? "👁️" : "🫣"}
                 </button>
             </div>
             {upCount > 0 && (
