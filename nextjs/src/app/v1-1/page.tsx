@@ -121,10 +121,10 @@ export default function Home() {
     if (waitForClientSide) return (
         <div style={styles.page}>
             <div style={styles.spacer} />
-            <div style={{ ...styles.counter, top: '20%', color: 'white', fontSize: '2rem' }}>
+            <div style={{ ...styles.counter, top: '25%', width: '100%', color: 'white', fontSize: '3rem' }}>
                 <Clock />
             </div>
-            <div style={{ ...styles.counter, width: '70%', display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ ...styles.counter, top: '70%', width: '58%', display: 'flex', justifyContent: 'space-between' }}>
                 <button
                     onClick={() => isPause ?
                         (

@@ -146,24 +146,31 @@ export default function Home() {
     }, [videoParam]);   // for onScrollUp and onScrollDown to see videoParam changes
 
     const [isPause, setIsPause] = useState(false);
-    const [isHide, setIsHide] = useState(false);
+    const [isMute, setIsMute] = useState(false);
+    const [isHide, setIsHide] = useState(true);
 
     if (waitForClientSide) return (
         <div style={styles.page}>
             <div style={styles.spacer} />
-            <div style={{ ...styles.counter, top: '13%' }}>
+            <div style={{ ...styles.counter, top: isHide ? '25%' : '13%', width: '100%', fontSize: isHide ? '3rem' : '2rem' }}>
                 <Clock />
             </div>
             <div style={styles.counter}>
-                <div className="w-[384px] h-[216px] bg-black">
-                    <div className={isHide ? "invisible" : "visible"}>
-                        {videoParam && <YouTubePlayer video={videoParam} isPause={isPause || isHide} seeker={seeker} />}
-                    </div>
+                <div className={isHide ? "invisible" : "w-[384px] h-[216px] bg-black"}>
+                    {videoParam && <YouTubePlayer video={videoParam} isPause={isPause || isHide} seeker={seeker} />}
                 </div>
             </div>
-            <div style={{ ...styles.counter, top: '82%', width: '50%', display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ ...styles.counter, top: isHide ? '70%' : '82%', width: isHide ? '70%' : '50%', fontSize: isHide ? '4rem' : '2rem', display: 'flex', justifyContent: 'space-between' }}>
                 <button
-                    onClick={() => videoParam ? setVideoParam(null) : send("get_info")}
+                    onClick={() => videoParam ?
+                        (
+                            setVideoParam(null),
+                            setIsHide(true)
+                        ) : (
+                            send("get_info"),
+                            setIsHide(false)
+                        )
+                    }
                 >
                     {videoParam ? "🗑️" : "⬇️"}
                 </button>
@@ -181,18 +188,34 @@ export default function Home() {
                 >
                     {isPause ? "▶️" : "⏸"}
                 </button>
-                <button
-                    onClick={() => isHide ?
-                        (
-                            setIsHide(false)
-                        ) : (
-                            setIsHide(true),
-                            videoParam && send("get_time")
-                        )
-                    }
-                >
-                    {isHide ? "👁️" : "🫣"}
-                </button>
+                {videoParam ?
+                    <button
+                        onClick={() => isHide ?
+                            (
+                                setIsHide(false)
+                            ) : (
+                                setIsHide(true),
+                                videoParam && send("get_time")
+                            )
+                        }
+                    >
+                        {isHide ? "👁️" : "🫣"}
+                    </button>
+                    :
+                    <button
+                        onClick={() => isMute ?
+                            (
+                                send("unmute"),
+                                setIsMute(false)
+                            ) : (
+                                send("mute"),
+                                setIsMute(true)
+                            )
+                        }
+                    >
+                        {isMute ? "🔊" : "🔇"}
+                    </button>
+                }
             </div>
             {upCount > 0 && (
                 <div style={{ ...styles.counter }}>-{upCount}</div>
@@ -200,7 +223,7 @@ export default function Home() {
             {downCount > 0 && (
                 <div style={{ ...styles.counter }}>+{downCount}</div>
             )}
-            <div style={{ ...styles.counter, top: '90%' }}>
+            <div style={{ ...styles.counter, top: '90%', fontSize: '16px' }}>
                 <span
                     style={{
                         color: connected ? "green" : "red",
@@ -230,7 +253,7 @@ const styles = {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        fontSize: '2rem', // fontSize: '4rem',
+        fontSize: '4rem',
         zIndex: 999,
         transition: 'opacity 0.2s',
         color: 'white',
