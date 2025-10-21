@@ -150,17 +150,17 @@ export default function Home() {
     const [isHide, setIsHide] = useState(true);
 
     if (waitForClientSide) return (
-        <div style={styles.page}>
-            <div style={styles.spacer} />
-            <div style={{ ...styles.counter, top: isHide ? '25%' : '13%', width: '100%', fontSize: isHide ? '3rem' : '2rem' }}>
+        <div className="page">
+            <div className="spacer" />
+            <div className={`counter ${isHide ? "clock-big" : "clock-small"}`}>
                 <Clock />
             </div>
-            <div style={styles.counter}>
+            <div className="counter">
                 <div className={isHide ? "invisible" : "w-[384px] h-[216px] bg-black"}>
                     {videoParam && <YouTubePlayer video={videoParam} isPause={isPause || isHide} seeker={seeker} />}
                 </div>
             </div>
-            <div style={{ ...styles.counter, top: isHide ? '70%' : '82%', width: isHide ? '70%' : '50%', fontSize: isHide ? '4rem' : '2rem', display: 'flex', justifyContent: 'space-between' }}>
+            <div className={`counter ${isHide ? "action-big !w-[70%]" : "action-small"}`}>
                 <button
                     onClick={() => videoParam ?
                         (
@@ -218,44 +218,16 @@ export default function Home() {
                 }
             </div>
             {upCount > 0 && (
-                <div style={{ ...styles.counter }}>-{upCount}</div>
+                <div className="counter">-{upCount}</div>
             )}
             {downCount > 0 && (
-                <div style={{ ...styles.counter }}>+{downCount}</div>
+                <div className="counter">+{downCount}</div>
             )}
-            <div style={{ ...styles.counter, top: '90%', fontSize: '16px' }}>
-                <span
-                    style={{
-                        color: connected ? "green" : "red",
-                        fontWeight: "bold",
-                        fontSize: "16px",
-                    }}
-                >
+            <div className="counter status">
+                <span className={connected ? "text-[#008000]" : "text-[#ff0000]"}>
                     {statusMsg}
                 </span>
             </div>
         </div>
     );
 }
-
-const styles = {
-    page: {
-        height: '200000px',
-        backgroundColor: '#000',
-        fontFamily: 'monospace',
-        position: 'relative' as const,
-    },
-    spacer: {
-        height: '200000px',
-    },
-    counter: {
-        position: 'fixed' as const,
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        fontSize: '4rem',
-        zIndex: 999,
-        transition: 'opacity 0.2s',
-        color: 'white',
-    },
-};

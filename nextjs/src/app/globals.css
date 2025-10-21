@@ -5,3 +5,56 @@ html, body {
   padding: 0;
   overscroll-behavior-y: none; /* disables pull-to-refresh on Android */
 }
+
+.page {
+  height: 200000px;
+  background-color: #000;
+  font-family: monospace;
+  position: relative;
+  color: white;
+}
+
+.spacer {
+  height: 200000px;
+}
+
+.counter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  z-index: 999;
+  transition: opacity 0.2s;
+}
+
+.status {
+  top: 90%;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.clock-big {
+  top: 25%;
+  width: 100%;
+  font-size: 3rem;
+}
+.clock-small {
+  top: 13%;
+  width: 100%;
+  font-size: 2rem;
+}
+
+.action-big {
+  display: flex;
+  justify-content: space-between;
+  top: 70%;
+  width: 58%;
+}
+.action-small {
+  display: flex;
+  justify-content: space-between;
+  top: 82%;
+  width: 50%;
+  font-size: 2rem;
+}

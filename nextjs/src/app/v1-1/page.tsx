@@ -119,12 +119,12 @@ export default function Home() {
     const [isMute, setIsMute] = useState(false);
 
     if (waitForClientSide) return (
-        <div style={styles.page}>
-            <div style={styles.spacer} />
-            <div style={{ ...styles.counter, top: '25%', width: '100%', color: 'white', fontSize: '3rem' }}>
+        <div className="page">
+            <div className="spacer" />
+            <div className="counter clock-big">
                 <Clock />
             </div>
-            <div style={{ ...styles.counter, top: '70%', width: '58%', display: 'flex', justifyContent: 'space-between' }}>
+            <div className="counter action-big">
                 <button
                     onClick={() => isPause ?
                         (
@@ -153,43 +153,16 @@ export default function Home() {
                 </button>
             </div>
             {upCount > 0 && (
-                <div style={{ ...styles.counter, color: '#f44' }}>-{upCount}</div>
+                <div className="counter text-[#f44]">-{upCount}</div>
             )}
             {downCount > 0 && (
-                <div style={{ ...styles.counter, color: '#4f4' }}>+{downCount}</div>
+                <div className="counter text-[#4f4]">+{downCount}</div>
             )}
-            <div style={{ ...styles.counter, top: '90%' }}>
-                <span
-                    style={{
-                        color: connected ? "green" : "red",
-                        fontWeight: "bold",
-                        fontSize: "16px",
-                    }}
-                >
+            <div className="counter status">
+                <span className={connected ? "text-[#008000]" : "text-[#ff0000]"}>
                     {statusMsg}
                 </span>
             </div>
         </div>
     );
 }
-
-const styles = {
-    page: {
-        height: '200000px',
-        backgroundColor: '#000',
-        fontFamily: 'monospace',
-        position: 'relative' as const,
-    },
-    spacer: {
-        height: '200000px',
-    },
-    counter: {
-        position: 'fixed' as const,
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        fontSize: '4rem',
-        zIndex: 999,
-        transition: 'opacity 0.2s',
-    },
-};
