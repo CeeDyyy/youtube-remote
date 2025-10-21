@@ -69,12 +69,12 @@ The system has three components:
 
 | Version    | Description                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| **v1.0.0** | Initial usable release with scroll-based remote control<br>🔧 Fix: Prevents parallel (duplicate) connections from iframes                                                                                                                |
+| **v1.0** | Initial usable release with scroll-based remote control<br>🔧 Fix: Prevents parallel (duplicate) connections from iframes                                                                                                                |
 | **v1.0.1** | Added auto-reconnect (2s delay) on WebSocket in both client and controller                                   |
 | **v1.0.2** | Optimized: Only triggers when YouTube tab is visible                                                         |
 | **v1.0.3** | Optimized: Replaced "only if visible" with **last active YouTube page** logic (if multiple YouTube tabs are open, only the most recently active one is controlled)<br>🗂️ Uses `localStorage` to keep track of the current owner tab                                                         |
-| **v1.1.0** | Added new additional controls: play/pause, mute; clock display; partial playback mirror sync prototype (WIP) |
-| **v1.2.0** | ✅ Full playback mirror/sync (a.k.a. *Request Video*): the controller can request the YouTube client’s video + params and play it on the remote device, with time sync and forward/backward support<br>### Recent Update — v1.2<br>Optimized power efficiency and performance on AMOLED devices. Added instant hide/show functionality instead of removing and reloading video. |
+| **v1.1** | Added new additional controls: play/pause, mute; clock display; partial playback mirror sync prototype (WIP)<br>### Recent Update<br>- Reorganized UI for easier use. |
+| **v1.2** | ✅ Full playback mirror/sync (a.k.a. *Request Video*): the controller can request the YouTube client’s video + params and play it on the remote device, with time sync and forward/backward support<br>### Recent Update<br>- Optimized power efficiency and performance on AMOLED devices. Added instant hide/show functionality instead of removing and reloading video.<br>- Improved battery efficiency and usability (true black background, new hide/show control, layout refinements). |
 
 ## 🧪 Notes
 

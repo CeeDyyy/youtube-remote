@@ -9,7 +9,8 @@ The format follows **Phases + Days** (like a dev journal), alongside semantic **
 
 ## 🟢 Phase 1 – Initial Development (Day 1–4)
 
-* **Day 1 (v1.0.0)**
+* **Day 1**
+  ###### v1.0
 
   * Proof of concept: control YouTube playback externally via Tampermonkey + WebSocket.
   * Basic scroll-to-seek (±1 second).
@@ -18,18 +19,21 @@ The format follows **Phases + Days** (like a dev journal), alongside semantic **
     ```js
     if (window.top !== window.self) return;
     ```
-* **Day 2 (v1.0.1)**
+* **Day 2**
+  ###### v1.0.1
 
   * Added a simple Web App as controller (buttons, no scroll yet).
   * Implemented auto-reconnect (2s after close) for both client & controller.
-* **Day 2 Night (v1.0.2)**
+* **Day 2 Night**
+  ###### v1.0.2
 
   * Controller Web App detects scroll → sends seek command.
   * Added “Only if visible” restriction (script only runs on visible tab).
 * **Day 3**
 
   * Deployed server → works online (no need for local run).
-* **Day 4 (v1.1.0)**
+* **Day 4**
+  ###### v1.1
 
   * Added more controls: play/pause, mute, clock display.
   * Prototype “YouTube playback mirror” (unfinished).
@@ -38,13 +42,15 @@ The format follows **Phases + Days** (like a dev journal), alongside semantic **
 
 ## 🟡 Phase 2 – After Break (Day 1+)
 
-* **Day 1 (v1.0.3)**
+* **Day 1**
+  ###### v1.0.3
 
   * Switched from “Only if visible” → **Last Active Tab** system.
   * Uses `localStorage` to store current “owner” YouTube page.
   * Behavior: if multiple YouTube tabs are open, only the last active tab responds to controls.
 
-* **Day 2 (v1.2)**
+* **Day 2**
+  ###### v1.2
 
   * ✅ Playback Mirror/Sync completed (*Request Video*).
   * Controller can now request:
@@ -53,19 +59,30 @@ The format follows **Phases + Days** (like a dev journal), alongside semantic **
     * Remote playback on Galaxy Watch with synced time.
     * Forward/backward seeking applied across devices.
 
-* **Day 3 (v1.2)** (Which take just a few minutes to do) 
+* **Day 3**
+  ###### v1.2 *(Which take just a few minutes to do)* 
 
   * Added version info in each log message (controller, client, and server).  
   * Helps identify which version each component is running for easier debugging and compatibility tracking.
 
-* **Day 3 (v1.2 — Instant Visibility Toggle and Display Power Optimization)** (This takes less than an hour to make) 
+* **Day 3**
+  ###### v1.2 — Instant Visibility Toggle and Display Power Optimization *(This takes less than an hour to make)* 
 
-  * Changed background color of the video player (when no video is loaded) from `bg-gray-800` (#1F2937) to `bg-black` (#000000) to save an additional small amount of battery on AMOLED displays (e.g. Samsung Galaxy Watch 6 Classic).
+  * Changed background color of the video player (when no video is loaded) from `bg-gray-800` (#1F2937) to `bg-black` (#000000 or true black) to reduce power usage for save an additional small amount of battery on AMOLED displays (e.g. Samsung Galaxy Watch 6 Classic).
   * Replaced the mute/unmute button with a hide/show button:
 
     * `Hide` instantly sets `visibility: hidden` and pauses the video (for battery saving) instead of removing the player.
     * `Show` restores `visibility: visible` and resumes playback without reloading the video.
     * This approach reduces battery and improves responsiveness avoids the delay caused by removing and re-requesting to reloading the video.
+
+* **Day 4**
+  ###### v1.1 — UI Layout Improvements
+  * Re-adjusted and rearranged control element positions for better usability and accessibility.
+  * Minor interface refinements for more intuitive operation.
+
+  ###### v1.2 — Display Power Optimization and UI Adjustments
+  * Brought back the mute/unmute button when there is **no requested video** (so users can still control playback state before loading).
+  * Adjusted element layout again for better usability with the new hide/show control.
 
 ---
 
