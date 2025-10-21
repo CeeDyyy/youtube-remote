@@ -87,7 +87,7 @@ The system has three components:
 * From **v1.0.3 onward**, controls target the **last active YouTube page** instead of only working when the tab is visible  
   - Uses `localStorage` to record the active YouTube page (the "owner")
 
-* From **v1.2.0 onward**, the controller can mirror YouTube playback (video, time sync, seeking)
+* From **v1.2 onward**, the controller can mirror YouTube playback (video, time sync, seeking)
 
 * Requires Tampermonkey extension to inject script into YouTube page
 
