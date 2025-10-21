@@ -95,6 +95,8 @@ The system has three components:
 
 * Prevents Tampermonkey script from running Parallel/duplicate WebSocket connections (from iframes)
 
+* **Technical Improvements** Improved performance and code structure (moved from inline styles to `className`-based styling) for faster rendering. *(This change applies retroactively to all previous versions.)*
+
 ---
 
 ## 🚧 To-Do

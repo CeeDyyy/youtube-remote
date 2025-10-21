@@ -84,6 +84,9 @@ The format follows **Phases + Days** (like a dev journal), alongside semantic **
   * Brought back the mute/unmute button when there is **no requested video** (so users can still control playback state before loading).
   * Adjusted element layout again for better usability with the new hide/show control.
 
+  ###### Applies retroactively to all previous versions
+  * Replaced inline `style` attributes with `className` usage across all components and all versions for cleaner DOM — reduces layout recalculations — Improves rendering efficiency — better performance, consistency, and maintainability.
+
 ---
 
 ## 🔮 Planned
