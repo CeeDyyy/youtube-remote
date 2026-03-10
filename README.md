@@ -123,6 +123,10 @@ To expose it securely to other devices, you can use Cloudflare Tunnel:
 ```bash
 cloudflared tunnel --url http://localhost:3000
 ```
+or
+```cmd
+.\cloudflared-windows-amd64.exe tunnel --url http://localhost:3000
+```
 This automatically provides:
 
 https://&lt;random&gt;.trycloudflare.com
