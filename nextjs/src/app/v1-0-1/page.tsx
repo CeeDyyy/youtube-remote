@@ -3,16 +3,19 @@
 import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
-  const [waitForClientSide, setWaitForClientSide] = useState(false);
-  useEffect(() => { setWaitForClientSide(true); }, []);
-
   const ws = useRef<WebSocket | null>(null);
   const reconnectTimeout = useRef<NodeJS.Timeout | null>(null);
   const [connected, setConnected] = useState(false);
   const [statusMsg, setStatusMsg] = useState("Disconnected");
 
-  // Replace with your PC's LAN address!
-  const serverUrl = "wss://ytr-serv.maisonsoftware.app";
+  const [serverUrl, setServerUrl] = useState<string | null>(null);
+  useEffect(() => {
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    // Replace with your PC's LAN address!
+    const url = process.env.NEXT_PUBLIC_WS_URL || `${protocol}://${window.location.host}/ws`; // Fallback to current host if env variable is not set
+
+    setServerUrl(url);
+  }, []);
 
   function setupWebSocket() {
     setStatusMsg("Connecting...");
@@ -49,13 +52,16 @@ export default function Home() {
   }
 
   useEffect(() => {
+    if (!serverUrl) return;
+
     setupWebSocket();
+
     return () => {
       ws.current?.close();
       if (reconnectTimeout.current) clearTimeout(reconnectTimeout.current);
     };
     // eslint-disable-next-line
-  }, []);
+  }, [serverUrl]);
 
   function send(msg: any) {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
@@ -114,7 +120,7 @@ export default function Home() {
     };
   }, []);
 
-  if (waitForClientSide) return (
+  if (serverUrl) return ( // If there is serverUrl, it means it's client side, because serverUrl is set in useEffect which only runs on client side.
     <div className="page">
       <div className="spacer" />
       {upCount > 0 && (

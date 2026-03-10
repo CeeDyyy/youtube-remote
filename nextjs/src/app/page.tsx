@@ -3,16 +3,22 @@
 import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
-  const [waitForClientSide, setWaitForClientSide] = useState(false);
-  useEffect(() => { setWaitForClientSide(true); }, []);
-
   const ws = useRef(null);
 
-  // Replace with your PC's LAN address!
-  const serverUrl = "wss://ytr-serv.maisonsoftware.app";
+  const [serverUrl, setServerUrl] = useState<string | null>(null);
+  useEffect(() => {
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    // Replace with your PC's LAN address!
+    const url = process.env.NEXT_PUBLIC_WS_URL || `${protocol}://${window.location.host}/ws`; // Fallback to current host if env variable is not set
+
+    setServerUrl(url);
+  }, []);
 
   useEffect(() => {
+    if (!serverUrl) return;
+
     ws.current = new WebSocket(serverUrl);
+
     return () => {
       ws.current?.close();
     };
@@ -70,7 +76,7 @@ export default function Home() {
     };
   }, []);
 
-  if (waitForClientSide) return (
+  if (serverUrl) return (   // If there is serverUrl, it means it's client side, because serverUrl is set in useEffect which only runs on client side.
     <div className="page">
       <div className="spacer" />
       {upCount > 0 && (

@@ -97,6 +97,52 @@ The system has three components:
 
 * **Technical Improvements** Improved performance and code structure (moved from inline styles to `className`-based styling) for faster rendering. *(This change applies retroactively to all previous versions.)*
 
+## Deployment Options
+
+This project can be deployed in two ways.
+
+### 1. Unified Server (Recommended for Personal Use)
+
+Runs the Next.js frontend and WebSocket relay in a single Node.js process.
+
+Steps:
+
+```bash
+cd nextjs
+npm install
+npm run build
+
+cd ..
+npm install
+node unified-server.js
+```
+
+Server will run on: http://localhost:3000
+
+To expose it securely to other devices, you can use Cloudflare Tunnel:
+```bash
+cloudflared tunnel --url http://localhost:3000
+```
+This automatically provides:
+
+https://&lt;random&gt;.trycloudflare.com
+
+wss://&lt;random&gt;.trycloudflare.com/ws
+
+### 2. Docker Deployment
+
+Docker configuration remains available for containerized environments.
+
+```bash
+npm run docker
+```
+
+Stop containers:
+
+```bash
+npm run docker:stop
+```
+
 ---
 
 ## 🚧 To-Do
