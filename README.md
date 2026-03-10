@@ -108,7 +108,7 @@ Runs the Next.js frontend and WebSocket relay in a single Node.js process.
 Steps:
 
 ```bash
-cd nextjs
+cd .\nextjs\
 npm install
 npm run build
 
