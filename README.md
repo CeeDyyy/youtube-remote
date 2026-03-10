@@ -114,7 +114,7 @@ npm run build
 
 cd ..
 npm install
-node unified-server.js
+npm run dev:unified or node unified-server.js
 ```
 
 Server will run on: http://localhost:3000
